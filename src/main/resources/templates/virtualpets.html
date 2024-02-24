@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VirtualPet</title>
+    <link rel="stylesheet" th:href="@{/CSS/styles.css}" />
+    <script th:src="@{/JS/createPet.js}"></script>
+    <script th:src="@{/JS/modal.js}"></script>
+    <script th:src="@{/JS/adoptPet.js}"></script>
+  </head>
+  <body>
+    <div class="virtualPets">
+      <h1>Virtual Pets</h1>
+      <button id="addButton" type="button">Add</button>
+      <button id="deleteSinglePet">Adopt A Pet</button>
+    </div>
+    <nav aria-label="Breadcrumb">
+      <ul class="assistance">
+        <li><a href="/">Home</a></li>
+        <li><a>Virtual Pets</a></li>
+      </ul>
+    </nav>
+    <h1 class="divider"></h1>
+    <table class="petTable">
+      <thead>
+        <tr>
+          <th>Pet ID</th>
+          <th>Pet Name</th>
+          <th>Pet Description</th>
+          <th>Pet Hunger</th>
+          <th>Pet Thirst</th>
+          <th>Pet Boredom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="virtualpet : ${virtualpets}">
+          <td th:text="${virtualpet.id}"></td>
+          <td th:text="${virtualpet.pet_name}"></td>
+          <td th:text="${virtualpet.pet_description}"></td>
+          <td th:text="${virtualpet.pet_hunger}"></td>
+          <td th:text="${virtualpet.pet_thirst}"></td>
+          <td th:text="${virtualpet.pet_boredom}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="modal-pet" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add a pet</h2>
+            <form id="petForm" onsubmit="submitPet(event)">
+                <div>
+                    <label for="form-stacked-text">Pet Name</label>
+                    <div>
+                        <input type="text" name="pet_name" id="pet_name" placeholder=""/>
+                    </div>
+                    <label for="form-stacked-text">Pet Description</label>
+                    <div>
+                        <input type="text" name="pet_description" id="pet_description" placeholder=""/>
+                    </div>
+                    <label for="form-stacked-text">Pet Hunger</label>
+                    <div>
+                        <input type="text" name="pet_hunger" id="pet_hunger" placeholder=""/>
+                    </div>
+                    <label for="form-stacked-text">Pet Thirst</label>
+                    <div>
+                        <input type="text" name="pet_thirst" id="pet_thirst" placeholder=""/>
+                    </div>
+                    <label for="form-stacked-text">Pet Boredom</label>
+                    <div>
+                        <input type="text" name="pet_boredom" id="pet_boredom" placeholder=""/>
+                    </div>
+                </div>
+                <p>
+                    <input type="submit" value="Save"/>
+                    <input type="reset" value="Reset"/>
+                </p>
+            </form>
+        </div>
+    </div>
+    <div id="modal-pet-delete" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Adopt a pet</h2>
+          <form id="deleteForm" onsubmit="adoptPet(event)">
+              <div>
+                  <label for="form-stacked-text">Pet ID</label>
+                  <div>
+                      <input type="text" name="id" id="id" placeholder=""/>
+                  </div>
+              </div>
+              <p>
+                  <input type="submit" value="Adoption"/>
+                  <input type="reset" value="Reset"/>
+              </p>
+          </form>
+      </div>
+  </div>
+  </body>
+</html>
